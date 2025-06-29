@@ -53,7 +53,7 @@ contract ZkMinimalAccount is IAccount, Ownable {
     }
 
     modifier requireFromBootloaderOrOwner() {
-        if (msg.sender != BOOTLOADER_FORMAL_ADDRESS || msg.sender != owner()) {
+        if (msg.sender != BOOTLOADER_FORMAL_ADDRESS && msg.sender != owner()) {
             revert ZkMinimalAccount__NotFromBootloaderOrOwner();
         }
         _;
