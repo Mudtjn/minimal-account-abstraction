@@ -133,8 +133,7 @@ contract ZkMinimalAccount is IAccount, Ownable {
         }
         // Check the signature
         bytes32 txHash = _transaction.encodeHash();
-        bytes32 convertedHash = MessageHashUtils.toEthSignedMessageHash(txHash);
-        address signer = ECDSA.recover(convertedHash, _transaction.signature);
+        address signer = ECDSA.recover(txHash, _transaction.signature);
         if (signer == owner()) {
             magic = ACCOUNT_VALIDATION_SUCCESS_MAGIC;
         } else {
